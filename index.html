@@ -1,0 +1,106 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Change the title of the web page to match the title of the Flask app -->
+        <title>Video Summarizer</title>
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <style>
+            body{
+                background-color: black;
+                color: white;
+                
+            }
+            /* use flexbox to create a two-column layout */
+.container {
+    display: flex;
+}
+
+/* make the sidebar fixed and narrow */
+.sidebar {
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* make the main content scrollable and responsive */
+.main {
+    flex: 1;
+    margin-left: 200px;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* add some hover effects to the sidebar items */
+.sidebar li a:hover {
+    color: white;
+    background-color: #c052b7;
+}
+form{
+    border: 1px solid rgb(158, 10, 96);
+    padding: 9px;
+    border-radius: 5px;
+    margin: 90px;
+    
+}
+form input{
+    margin: 10px;
+    border-radius: 5px;
+    width: 390px;
+    height: 40px;
+}
+
+h1{
+    text-align: center;
+}
+form input[type = "submit"]{
+    background-color: rgb(158, 10, 96);
+    color: white;
+}
+form input:hover{
+    background: #fac2f4;
+    color: black;
+    font-weight: bolder;
+}
+/* Add some style for the reload button
+form button{
+    margin: 10px;
+    border-radius: 5px;
+    width: 390px;
+    height: 40px;
+    background-color: #c052b7;
+    color: white;
+    font-weight: bolder;
+} */
+        </style>
+    </head>
+    <body>
+        <h1>Video Transcript Summarizer</h1>
+        <div class="container">
+            <div class="main">
+                <form method="POST">
+                    <label for="video_link"> <strong>Enter video link:</strong></label><br>
+                    <input type="text" id="video_link" name="video_link"><br>
+                    <input type="submit" value="Get Summary"><br>
+                    <input type="submit" name="delete" value="Delete Transcript"><br>
+                    <label for="transcript">Edit Transcript: </label><br>
+                    <textarea id="transcript" name="transcript">{{ transcript }}</textarea><br>
+                    <p>INSTRUCTIONS:: This Web application will only generate summary for those video who have transcript, if your video doen't have any transcript you will face the error page</p>
+                </form>
+                <!-- add a paragraph element to display the transcript -->
+                {% if transcript %}
+                    {% if transcript == "Sorry this video doesn't have any transcript" %}
+                        <p class="error">{{ transcript }}</p>
+                    {% else %}
+                        <h2>Results::</h2>
+                        <p>{{ transcript }}</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>
+
+ <!-- Add a new input element to the form that allows the user to reload the app -->
+            <!-- <button type="button" onclick="window.location.href='/reload'">Reload App</button> -->
